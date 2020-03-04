@@ -1,0 +1,20 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+
+        row = len(grid)
+        col = len(grid[0])
+        rotten = {(i, j) for i in range(row) for j in range(col) if grid[i][j] == 2} # 腐烂集合
+        fresh = {(i, j) for i in range(row) for j in range(col) if grid[i][j] == 1}  # 新鲜集合
+        time = 0
+        while fresh:
+            if not rotten: 
+                return -1
+            x=set([])
+            for i, j in rotten:
+                for di, dj in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                    if (i + di, j + dj) in fresh:
+                        x.add((i + di, j + dj))
+            rotten = x
+            fresh  -= rotten
+            time += 1
+        return time
