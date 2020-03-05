@@ -1,0 +1,13 @@
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        i,j = 0,0
+        while j <len(nums):
+            if nums[j]!=val:
+                nums[i]=nums[j]
+                i+=1
+                j+=1
+            else:
+                j+=1
+        return i
+ #总结：双指针法
+ #不要思维定式,只考虑==,有时要考虑用!=
