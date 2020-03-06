@@ -1,0 +1,28 @@
+#答案 滑窗
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        str = ''
+        count = 0
+        for each in s:
+            if each in str:
+                count = max(len(str),count)
+                str = str[str.index(each)+1:] + each
+            else:
+                str += each
+        return max(count,len(str))
+        
+# 自己答案
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        i=0
+        n=1
+        m=0
+        while n <= len(s):
+            if len(set(s[i:n])) < n-i:
+                i += 1
+            else:
+                m=max(m,n-i)
+                n += 1
+        return m
+#总结  学会了滑窗法
+#缺点 不要用切片等 时间复杂度高的步骤
