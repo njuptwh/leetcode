@@ -1,0 +1,67 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        m=0
+        i=0
+        while i < len(s):
+            if s[i] == 'I':
+                if i == len(s)-1:
+                    return m+1
+                elif s[i+1] == 'V':
+                    i+=2
+                    m+=4
+                elif  s[i+1]== 'X':
+                    i+=2
+                    m+=9
+                else:
+                    i+=1
+                    m+=1
+            elif s[i] == 'X':
+                if i == len(s)-1:
+                    return m+10
+                elif s[i+1] == 'L':
+                    i+=2
+                    m+=40
+                elif  s[i+1]== 'C':
+                    i+=2
+                    m+=90
+                else:
+                    i+=1
+                    m+=10
+            elif s[i] == 'C':
+                if i == len(s)-1:
+                    return m+100
+                elif s[i+1] == 'D':
+                    i+=2
+                    m+=400
+                elif  s[i+1]== 'M':
+                    i+=2
+                    m+=900
+                else:
+                    i+=1
+                    m+=100
+            elif s[i] =='V':
+                m+=5
+                i+=1
+            elif s[i] =='L':
+                m+=50
+                i+=1
+            elif s[i] =='D':
+                m+=500
+                i+=1
+            else:
+                i+=1
+                m+=1000
+        return m
+  #傻逼方法
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        m=0
+        dic_s={'I':1, 'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+        for i in range(len(s)-1):
+            if dic_s[s[i]] <dic_s[s[i+1]]:
+                m -= dic_s[s[i]]
+            else:
+                m += dic_s[s[i]]
+        return m + dic_s[s[-1]]
+        #改进后的方法
+        #思路：比后面大的 就加，比后面小的就减
